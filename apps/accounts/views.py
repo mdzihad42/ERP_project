@@ -103,15 +103,21 @@ def verify_otp(request):
             elif purpose == 'Register':
                 reg_data = request.session.get('reg_data')
                 if reg_data:
+                    # Auto-approve customers
+                    status = 'Approved' if role.capitalize() == 'Customer' else 'Pending'
+                    
                     # Re-instantiate registration form to save correctly
                     form = RegisterForm(reg_data)
                     if form.is_valid():
                         user = form.save(commit=False)
                         user.set_password(reg_data['password'])
                         user.user_role = role.capitalize() # Match choices
-                        user.status = 'Pending' # Always pending initially
+                        user.status = status
                         user.save()
-                        messages.success(request, "Registration successful! Please wait for Super Admin approval.")
+                        if status == 'Approved':
+                            messages.success(request, "Registration successful! You are now approved.")
+                        else:
+                            messages.success(request, "Registration successful! Please wait for Super Admin approval.")
                         return redirect('landing')
             
             elif purpose == 'Forgot':

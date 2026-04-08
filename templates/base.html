@@ -35,15 +35,18 @@
                         <a class="nav-link fw-semibold text-dark" href="#">Help Center</a>
                     </li>
                     {% if user.is_authenticated and user.user_role != 'Customer' and user.user_role != 'Staff' %}
-                    <li class="nav-item ms-lg-3">
-                        <a class="btn btn-warning rounded-pill px-4 py-2 small fw-bold shadow-sm" href="{% url 'module_gateway' %}">
-                            <i class="bi bi-grid-3x3-gap-fill me-2"></i> Switch Module
-                        </a>
-                    </li>
+                    {% block navbar_extra %}{% endblock %}
                     {% endif %}
                     {% if user.is_authenticated %}
+                    <li class="nav-item me-3 d-flex align-items-center">
+                        <div class="text-end line-height-1">
+                            <div class="fw-bold small text-dark">{{ user.username }}</div>
+                            <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1" style="font-size: 10px;">{{ user.get_user_role_display|upper|default:user.user_role }}</span>
+                        </div>
+                        <i class="bi bi-person-circle fs-4 ms-2 text-primary"></i>
+                    </li>
                     <li class="nav-item">
-                        <a class="btn btn-outline-danger ms-lg-3 rounded-pill" href="{% url 'logout' %}">Logout</a>
+                        <a class="btn btn-outline-danger ms-lg-2 rounded-pill py-1 px-3 small" href="{% url 'logout' %}">Logout</a>
                     </li>
                     {% endif %}
                 </ul>
