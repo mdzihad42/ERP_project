@@ -1,0 +1,53 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block title %}Staff Dashboard - Bavaria ERP{% endblock %}
+{% block sidebar_title %}STAFF MENU{% endblock %}
+
+{% block sidebar_items %}
+<a href="?page=JobPost" class="db-sidebar-link {% if page == 'JobPost' %}active{% endif %}">
+    <i class="bi bi-person-plus"></i> Job Post
+</a>
+<a href="?page=Salary" class="db-sidebar-link {% if page == 'Salary' %}active{% endif %}">
+    <i class="bi bi-cash-stack"></i> Salary
+</a>
+<a href="?page=Complain" class="db-sidebar-link {% if page == 'Complain' %}active{% endif %}">
+    <i class="bi bi-megaphone"></i> Complain
+</a>
+<a href="?page=WorkSchedule" class="db-sidebar-link {% if page == 'WorkSchedule' %}active{% endif %}">
+    <i class="bi bi-calendar-event"></i> Work Schedule
+</a>
+<a href="?page=Holidays" class="db-sidebar-link {% if page == 'Holidays' %}active{% endif %}">
+    <i class="bi bi-sun"></i> Holidays
+</a>
+<a href="?page=Leave" class="db-sidebar-link {% if page == 'Leave' %}active{% endif %}">
+    <i class="bi bi-file-earmark-person"></i> Leave Application
+</a>
+<a href="?page=Email" class="db-sidebar-link {% if page == 'Email' %}active{% endif %}">
+    <i class="bi bi-envelope"></i> Email
+</a>
+<a href="?page=DataRequest" class="db-sidebar-link {% if page == 'DataRequest' %}active{% endif %}">
+    <i class="bi bi-database-exclamation"></i> Data Request
+</a>
+<a href="?page=Task" class="db-sidebar-link {% if page == 'Task' %}active{% endif %}">
+    <i class="bi bi-list-task"></i> Todays Task
+</a>
+<a href="?page=LiveChat" class="db-sidebar-link {% if page == 'LiveChat' %}active{% endif %}">
+    <i class="bi bi-chat-dots"></i> Live Chat
+</a>
+{% endblock %}
+
+{% block db_title %}{{ page|default:"Employee Overview" }}{% endblock %}
+
+{% block db_content %}
+<div class="row animated">
+    <div class="col-lg-12">
+        <div class="card premium-card p-5 text-center shadow-sm">
+            <h1 class="display-6 fw-bold mb-3 text-success">{{ page|default:"Good day at Bavaria Garments!" }}</h1>
+            <p class="lead text-muted">{{ message|default:"Manage your work life, check your salary, and request leave here." }}</p>
+            <div class="alert alert-success d-inline-block mt-4 mx-auto px-4 rounded-pill">
+                <i class="bi bi-check-circle me-2"></i> This is a placeholder page for the <strong>{{ page }}</strong> staff module. Implementation coming soon.
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

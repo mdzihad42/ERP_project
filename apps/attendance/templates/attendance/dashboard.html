@@ -1,0 +1,65 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block title %}Attendance Dashboard - Bavaria ERP{% endblock %}
+{% block sidebar_title %}ATTENDANCE MENU{% endblock %}
+
+{% block sidebar_items %}
+<a href="?page=RegisteredEmployee" class="db-sidebar-link {% if page == 'RegisteredEmployee' %}active{% endif %}">
+    <i class="bi bi-person-check"></i> Registered Employee
+</a>
+<a href="?page=WeeklySchedule" class="db-sidebar-link {% if page == 'WeeklySchedule' %}active{% endif %}">
+    <i class="bi bi-calendar-range"></i> Weekly Schedule
+</a>
+<a href="?page=EmployeeHoliday" class="db-sidebar-link {% if page == 'EmployeeHoliday' %}active{% endif %}">
+    <i class="bi bi-calendar-heart"></i> Employee Holiday
+</a>
+<a href="?page=Leave" class="db-sidebar-link {% if page == 'Leave' %}active{% endif %}">
+    <i class="bi bi-file-earmark-person"></i> Leave
+</a>
+<a href="?page=CalendarView" class="db-sidebar-link {% if page == 'CalendarView' %}active{% endif %}">
+    <i class="bi bi-calendar-event"></i> Calendar View
+</a>
+<a href="?page=EmployeeAttendance" class="db-sidebar-link {% if page == 'EmployeeAttendance' %}active{% endif %}">
+    <i class="bi bi-fingerprint"></i> Employee Attendance
+</a>
+<a href="?page=WeeklyPayroll" class="db-sidebar-link {% if page == 'WeeklyPayroll' %}active{% endif %}">
+    <i class="bi bi-wallet2"></i> Weekly Payroll Submit
+</a>
+<a href="?page=SalarySheetApprove" class="db-sidebar-link {% if page == 'SalarySheetApprove' %}active{% endif %}">
+    <i class="bi bi-check2-square"></i> Salary Sheet Approved/Reject
+</a>
+<a href="?page=MonthlySalary" class="db-sidebar-link {% if page == 'MonthlySalary' %}active{% endif %}">
+    <i class="bi bi-cash-stack"></i> Monthly Salary Sheet Submit
+</a>
+<a href="?page=SalarySend" class="db-sidebar-link {% if page == 'SalarySend' %}active{% endif %}">
+    <i class="bi bi-send-check"></i> Salary Sheet Send To Employee
+</a>
+<a href="?page=SalaryPaid" class="db-sidebar-link {% if page == 'SalaryPaid' %}active{% endif %}">
+    <i class="bi bi-currency-dollar"></i> Salary Payment Paid Out
+</a>
+<a href="?page=EmployeeReview" class="db-sidebar-link {% if page == 'EmployeeReview' %}active{% endif %}">
+    <i class="bi bi-star-fill"></i> Employee Review
+</a>
+<a href="?page=LiveChat" class="db-sidebar-link {% if page == 'LiveChat' %}active{% endif %}">
+    <i class="bi bi-chat-dots"></i> Live Chat
+</a>
+{% endblock %}
+
+{% block db_title %}{{ page|default:"Attendance Hub" }}{% endblock %}
+
+{% block db_content %}
+<div class="row animated">
+    <div class="col-lg-12">
+        <div class="card premium-card p-5 text-center shadow-sm">
+            <h1 class="display-6 fw-bold mb-3 text-info">{{ page|default:"Manage Staff Presence and Payroll" }}</h1>
+            <p class="lead text-muted">{{ message|default:"Access tracking, approval, and distribution for company-wide attendance and payroll." }}</p>
+            <div class="alert alert-info d-inline-block mt-4 mx-auto px-4 rounded-pill">
+                <i class="bi bi-info-circle me-2"></i> This is a placeholder page for the <strong>{{ page }}</strong> attendance module. Implementation coming soon.
+            </div>
+            <div class="mt-4 p-3 bg-light rounded text-dark small fw-bold">
+                CONTEXT ACTIVE: Unit [{{ request.session.context_unit|default:"Global" }}] | Country [{{ request.session.context_country|default:"Global" }}]
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

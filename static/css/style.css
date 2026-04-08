@@ -1,0 +1,86 @@
+:root {
+    --bavaria-blue: #003366;
+    --bavaria-gold: #c5a059;
+    --bavaria-dark: #1a1a1a;
+    --bavaria-light: #f8f9fa;
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bavaria-light);
+    color: var(--bavaria-dark);
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.premium-card {
+    background: white;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.premium-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 51, 102, 0.15);
+}
+
+.glass-morphism {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+}
+
+.btn-bavaria {
+    background-color: var(--bavaria-blue);
+    color: white;
+    border-radius: 30px;
+    padding: 10px 25px;
+    font-weight: 600;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-bavaria:hover {
+    background-color: #002244;
+    color: white;
+    transform: scale(1.05);
+}
+
+.navbar-brand img {
+    height: 40px;
+}
+
+.page-title {
+    font-weight: 800;
+    color: var(--bavaria-blue);
+    margin-bottom: 2rem;
+}
+
+.role-icon {
+    font-size: 3rem;
+    color: var(--bavaria-blue);
+    margin-bottom: 1rem;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animated {
+    animation: fadeInUp 0.6s ease-out forwards;
+}

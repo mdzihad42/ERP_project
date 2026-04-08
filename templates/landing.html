@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Bavaria Garments - Select Role{% endblock %}
+
+{% block content %}
+<div class="row align-items-center mb-5 animated">
+    <div class="col-lg-8 mx-auto text-center">
+        <h1 class="display-4 fw-bold text-dark">Welcome to <span style="color: var(--bavaria-blue);">Bavaria Garments ERP</span></h1>
+        <p class="lead text-muted">A premium, integrated management system for every level of our operations.</p>
+        <p class="fw-semibold mt-4">Please select your role to proceed:</p>
+    </div>
+</div>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-5 g-4 animated" style="animation-delay: 0.2s;">
+    <!-- Customer Role -->
+    <div class="col">
+        <a href="{% url 'accounts_auth' %}?role=customer" class="text-decoration-none text-dark">
+            <div class="card h-100 premium-card text-center p-4">
+                <div class="card-body">
+                    <i class="bi bi-people-fill role-icon"></i>
+                    <h5 class="fw-bold mt-2">Customer</h5>
+                    <p class="text-muted small mb-0">Products, orders, and coins.</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Staff Role -->
+    <div class="col">
+        <a href="{% url 'accounts_auth' %}?role=staff" class="text-decoration-none text-dark">
+            <div class="card h-100 premium-card text-center p-4">
+                <div class="card-body">
+                    <i class="bi bi-person-badge-fill role-icon" style="color: #008080;"></i>
+                    <h5 class="fw-bold mt-2">Staff</h5>
+                    <p class="text-muted small mb-0">Task management and payroll.</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Unit Role -->
+    <div class="col">
+        <a href="{% url 'accounts_auth' %}?role=unit" class="text-decoration-none text-dark">
+            <div class="card h-100 premium-card text-center p-4">
+                <div class="card-body">
+                    <i class="bi bi-building-fill role-icon" style="color: #FF8C00;"></i>
+                    <h5 class="fw-bold mt-2">Unit</h5>
+                    <p class="text-muted small mb-0">HR, attendance, and machines.</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Admin Role -->
+    <div class="col">
+        <a href="{% url 'accounts_auth' %}?role=admin" class="text-decoration-none text-dark">
+            <div class="card h-100 premium-card text-center p-4">
+                <div class="card-body">
+                    <i class="bi bi-shield-lock-fill role-icon" style="color: #4B0082;"></i>
+                    <h5 class="fw-bold mt-2">Admin</h5>
+                    <p class="text-muted small mb-0">Regional and unit-level control.</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Super Admin Role -->
+    <div class="col">
+        <a href="{% url 'accounts_auth' %}?role=super_admin" class="text-decoration-none text-dark">
+            <div class="card h-100 premium-card text-center p-4">
+                <div class="card-body">
+                    <i class="bi bi-person-fill-gear role-icon" style="color: #B22222;"></i>
+                    <h5 class="fw-bold mt-2">Super Admin</h5>
+                    <p class="text-muted small mb-0">Full system access and data tracking.</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="row mt-5 pt-4 text-center animated" style="animation-delay: 0.4s;">
+    <div class="col-lg-6 mx-auto">
+        <div class="glass-morphism p-4 border shadow-sm">
+            <p class="mb-0 text-dark small"><i class="bi bi-info-circle-fill me-2"></i> All logins are secured by Multi-Factor Authentication (OTP).</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

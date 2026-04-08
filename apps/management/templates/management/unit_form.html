@@ -1,0 +1,32 @@
+{% extends 'accounts/admin/base_admin.html' %}
+
+{% block admin_title %}{{ title }}{% endblock %}
+
+{% block admin_content %}
+<div class="row">
+    <div class="col-md-8 col-lg-6">
+        <div class="card premium-card p-5">
+            <h5 class="fw-bold mb-4">Unit Details</h5>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label class="form-label small fw-bold">Select City</label>
+                    {{ form.city }}
+                </div>
+                <div class="mb-4">
+                    <label class="form-label small fw-bold">Unit Number (Ex: Dhaka-01)</label>
+                    {{ form.unit_no }}
+                </div>
+                <div class="mb-4">
+                    <label class="form-label small fw-bold">Description</label>
+                    {{ form.description }}
+                </div>
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-bavaria py-3 flex-grow-1 rounded-pill">Save Unit</button>
+                    <a href="{% url 'admin_unit' %}" class="btn btn-light py-3 px-4 rounded-pill">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

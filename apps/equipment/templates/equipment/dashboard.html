@@ -1,0 +1,120 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block title %}Full Equipment Inventory - Bavaria ERP{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<style>
+    .sidebar-category-header {
+        font-size: 11px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        font-weight: 800;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        padding-left: 1.5rem;
+        opacity: 0.7;
+    }
+    .db-sidebar-link {
+        font-size: 12.5px !important;
+        padding: 0.6rem 1.5rem !important;
+    }
+    /* Scroll bar for sidebar if list is too long */
+    .dashboard-sidebar {
+        overflow-y: auto;
+        height: 100vh;
+        scrollbar-width: thin;
+    }
+</style>
+{% endblock %}
+
+{% block sidebar_title %}EQUIPMENT LISTING{% endblock %}
+
+{% block sidebar_items %}
+<!-- FACTORY -->
+<div class="sidebar-category-header text-primary">FACTORY</div>
+<a href="?page=F-Machine" class="db-sidebar-link {% if page == 'F-Machine' %}active{% endif %}"><i class="bi bi-gear-fill"></i> Machine</a>
+<a href="?page=F-Equip" class="db-sidebar-link {% if page == 'F-Equip' %}active{% endif %}"><i class="bi bi-tools"></i> Equipment</a>
+<a href="?page=F-Fabric" class="db-sidebar-link {% if page == 'F-Fabric' %}active{% endif %}"><i class="bi bi-layers-half"></i> Fabric</a>
+<a href="?page=F-Access" class="db-sidebar-link {% if page == 'F-Access' %}active{% endif %}"><i class="bi bi-box-seam"></i> Accessories</a>
+<a href="?page=F-Furn" class="db-sidebar-link {% if page == 'F-Furn' %}active{% endif %}"><i class="bi bi-chair"></i> Furniture</a>
+<a href="?page=F-Elec" class="db-sidebar-link {% if page == 'F-Elec' %}active{% endif %}"><i class="bi bi-lightning-charge"></i> Electronics</a>
+<a href="?page=F-Hosp" class="db-sidebar-link {% if page == 'F-Hosp' %}active{% endif %}"><i class="bi bi-cup-hot"></i> Hospitality</a>
+<a href="?page=F-Jug" class="db-sidebar-link {% if page == 'F-Jug' %}active{% endif %}"><i class="bi bi-droplet"></i> Jug</a>
+<a href="?page=F-Glass" class="db-sidebar-link {% if page == 'F-Glass' %}active{% endif %}"><i class="bi bi-cup"></i> Glass</a>
+<a href="?page=F-Cup" class="db-sidebar-link {% if page == 'F-Cup' %}active{% endif %}"><i class="bi bi-cup-straw"></i> Cup</a>
+<a href="?page=F-Pirich" class="db-sidebar-link {% if page == 'F-Pirich' %}active{% endif %}"><i class="bi bi-circle"></i> Pirich</a>
+<a href="?page=F-Plate" class="db-sidebar-link {% if page == 'F-Plate' %}active{% endif %}"><i class="bi bi-disc"></i> Plate</a>
+<a href="?page=F-Spoon" class="db-sidebar-link {% if page == 'F-Spoon' %}active{% endif %}"><i class="bi bi-spoon"></i> Spone</a>
+<a href="?page=F-Add" class="db-sidebar-link text-primary fw-bold"><i class="bi bi-plus-lg"></i> Add New</a>
+
+<!-- RETAIL STORE -->
+<div class="sidebar-category-header text-success">RETAIL STORE</div>
+<a href="?page=R-Machine" class="db-sidebar-link {% if page == 'R-Machine' %}active{% endif %}"><i class="bi bi-shop-window"></i> Machine</a>
+<a href="?page=R-Equip" class="db-sidebar-link {% if page == 'R-Equip' %}active{% endif %}"><i class="bi bi-wrench-adjustable"></i> Equipment</a>
+<a href="?page=R-Fabric" class="db-sidebar-link {% if page == 'R-Fabric' %}active{% endif %}"><i class="bi bi-palette"></i> Fabric</a>
+<a href="?page=R-Access" class="db-sidebar-link {% if page == 'R-Access' %}active{% endif %}"><i class="bi bi-box2"></i> Accessories</a>
+<a href="?page=R-Furn" class="db-sidebar-link {% if page == 'R-Furn' %}active{% endif %}"><i class="bi bi-display"></i> Furniture</a>
+<a href="?page=R-Elec" class="db-sidebar-link {% if page == 'R-Elec' %}active{% endif %}"><i class="bi bi-cpu"></i> Electronics</a>
+<a href="?page=R-Hosp" class="db-sidebar-link {% if page == 'R-Hosp' %}active{% endif %}"><i class="bi bi-cup-hot-fill"></i> Hospitality</a>
+<a href="?page=R-Jug" class="db-sidebar-link {% if page == 'R-Jug' %}active{% endif %}"><i class="bi bi-droplet-half"></i> Jug</a>
+<a href="?page=R-Glass" class="db-sidebar-link {% if page == 'R-Glass' %}active{% endif %}"><i class="bi bi-cup-fill"></i> Glass</a>
+<a href="?page=R-Cup" class="db-sidebar-link {% if page == 'R-Cup' %}active{% endif %}"><i class="bi bi-cup-straw-fill"></i> Cup</a>
+<a href="?page=R-Pirich" class="db-sidebar-link {% if page == 'R-Pirich' %}active{% endif %}"><i class="bi bi-record-circle"></i> Pirich</a>
+<a href="?page=R-Plate" class="db-sidebar-link {% if page == 'R-Plate' %}active{% endif %}"><i class="bi bi-circle-fill"></i> Plate</a>
+<a href="?page=R-Spoon" class="db-sidebar-link {% if page == 'R-Spoon' %}active{% endif %}"><i class="bi bi-slash-lg"></i> Spone</a>
+<a href="?page=R-Add" class="db-sidebar-link text-success fw-bold"><i class="bi bi-plus-lg"></i> Add New</a>
+
+<!-- WAREHOUSE -->
+<div class="sidebar-category-header text-warning">WARE HOUSE</div>
+<a href="?page=W-Machine" class="db-sidebar-link {% if page == 'W-Machine' %}active{% endif %}"><i class="bi bi-boxes"></i> Machine</a>
+<a href="?page=W-Equip" class="db-sidebar-link {% if page == 'W-Equip' %}active{% endif %}"><i class="bi bi-hammer"></i> Equipment</a>
+<a href="?page=W-Fabric" class="db-sidebar-link {% if page == 'W-Fabric' %}active{% endif %}"><i class="bi bi-archive-fill"></i> Fabric</a>
+<a href="?page=W-Access" class="db-sidebar-link {% if page == 'W-Access' %}active{% endif %}"><i class="bi bi-box-fill"></i> Accessories</a>
+<a href="?page=W-Furn" class="db-sidebar-link {% if page == 'W-Furn' %}active{% endif %}"><i class="bi bi-archive"></i> Furniture</a>
+<a href="?page=W-Elec" class="db-sidebar-link {% if page == 'W-Elec' %}active{% endif %}"><i class="bi bi-hdd-rack"></i> Electronics</a>
+<a href="?page=W-Hosp" class="db-sidebar-link {% if page == 'W-Hosp' %}active{% endif %}"><i class="bi bi-cup"></i> Hospitality</a>
+<a href="?page=W-Jug" class="db-sidebar-link {% if page == 'W-Jug' %}active{% endif %}"><i class="bi bi-droplet"></i> Jug</a>
+<a href="?page=W-Glass" class="db-sidebar-link {% if page == 'W-Glass' %}active{% endif %}"><i class="bi bi-cup-hot"></i> Glass</a>
+<a href="?page=W-Cup" class="db-sidebar-link {% if page == 'W-Cup' %}active{% endif %}"><i class="bi bi-cup-straw"></i> Cup</a>
+<a href="?page=W-Pirich" class="db-sidebar-link {% if page == 'W-Pirich' %}active{% endif %}"><i class="bi bi-circle"></i> Pirich</a>
+<a href="?page=W-Plate" class="db-sidebar-link {% if page == 'W-Plate' %}active{% endif %}"><i class="bi bi-disc"></i> Plate</a>
+<a href="?page=W-Spoon" class="db-sidebar-link {% if page == 'W-Spoon' %}active{% endif %}"><i class="bi bi-slash"></i> Spone</a>
+<a href="?page=W-Add" class="db-sidebar-link text-warning fw-bold"><i class="bi bi-plus-lg"></i> Add New</a>
+
+<!-- OFFICE -->
+<div class="sidebar-category-header text-info">OFFICE</div>
+<a href="?page=O-Furn" class="db-sidebar-link {% if page == 'O-Furn' %}active{% endif %}"><i class="bi bi-table"></i> Furniture</a>
+<a href="?page=O-Comp" class="db-sidebar-link {% if page == 'O-Comp' %}active{% endif %}"><i class="bi bi-laptop"></i> Computer</a>
+<a href="?page=O-Print" class="db-sidebar-link {% if page == 'O-Print' %}active{% endif %}"><i class="bi bi-printer-fill"></i> Printer</a>
+<a href="?page=O-Phone" class="db-sidebar-link {% if page == 'O-Phone' %}active{% endif %}"><i class="bi bi-telephone"></i> Phone</a>
+<a href="?page=O-Cam" class="db-sidebar-link {% if page == 'O-Cam' %}active{% endif %}"><i class="bi bi-webcam"></i> Camera</a>
+<a href="?page=O-Route" class="db-sidebar-link {% if page == 'O-Route' %}active{% endif %}"><i class="bi bi-router-fill"></i> Router</a>
+<a href="?page=O-Mobile" class="db-sidebar-link {% if page == 'O-Mobile' %}active{% endif %}"><i class="bi bi-phone"></i> Mobile</a>
+<a href="?page=O-Key" class="db-sidebar-link {% if page == 'O-Key' %}active{% endif %}"><i class="bi bi-keyboard"></i> Keybord</a>
+<a href="?page=O-Head" class="db-sidebar-link {% if page == 'O-Head' %}active{% endif %}"><i class="bi bi-headphones"></i> Headphone</a>
+<a href="?page=O-Pen" class="db-sidebar-link {% if page == 'O-Pen' %}active{% endif %}"><i class="bi bi-pen"></i> Pen</a>
+<a href="?page=O-File" class="db-sidebar-link {% if page == 'O-File' %}active{% endif %}"><i class="bi bi-file-earmark-spreadsheet"></i> File</a>
+<a href="?page=O-Pap" class="db-sidebar-link {% if page == 'O-Pap' %}active{% endif %}"><i class="bi bi-file-pdf"></i> Print Paper</a>
+<a href="?page=O-Pad" class="db-sidebar-link {% if page == 'O-Pad' %}active{% endif %}"><i class="bi bi-journal-text"></i> Writing Pad</a>
+<a href="?page=O-Add" class="db-sidebar-link text-info fw-bold"><i class="bi bi-plus-lg"></i> Add New</a>
+{% endblock %}
+
+{% block db_title %}{{ page|default:"Universal Asset Viewer" }}{% endblock %}
+
+{% block db_content %}
+<div class="row animated">
+    <div class="col-lg-12">
+        <div class="card premium-card p-5 text-center shadow-sm border-0 bg-white">
+            <h1 class="display-6 fw-bold mb-1">{{ page|default:"Asset Log" }}</h1>
+             <p class="text-muted small">Tracking Item Code #{{ page|default:"GENERAL" }}</p>
+            <hr class="w-25 mx-auto">
+            <p class="lead text-muted">A full-scale overview of the selected inventory category across all company location levels.</p>
+            
+            <div class="alert alert-secondary d-inline-block mt-4 mx-auto px-5 rounded-pill border-0 shadow-sm">
+                <i class="bi bi-shield-check me-2"></i> Authorized View | Category: <strong>{{ page }}</strong>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block title %}HR Dashboard - Bavaria ERP{% endblock %}
+{% block sidebar_title %}HR MENU{% endblock %}
+
+{% block sidebar_items %}
+<a href="?page=JobRequest" class="db-sidebar-link {% if page == 'JobRequest' %}active{% endif %}">
+    <i class="bi bi-file-earmark-plus"></i> Job Request
+</a>
+<a href="?page=JobTemplate" class="db-sidebar-link {% if page == 'JobTemplate' %}active{% endif %}">
+    <i class="bi bi-file-earmark-text"></i> Job Template
+</a>
+<a href="?page=JobApplication" class="db-sidebar-link {% if page == 'JobApplication' %}active{% endif %}">
+    <i class="bi bi-person-lines-fill"></i> Job Application
+</a>
+<a href="?page=NewHire" class="db-sidebar-link {% if page == 'NewHire' %}active{% endif %}">
+    <i class="bi bi-person-plus-fill"></i> New Hire
+</a>
+<a href="?page=Email" class="db-sidebar-link {% if page == 'Email' %}active{% endif %}">
+    <i class="bi bi-envelope-at"></i> Email
+</a>
+<a href="?page=AppointmentTemplate" class="db-sidebar-link {% if page == 'AppointmentTemplate' %}active{% endif %}">
+    <i class="bi bi-file-text"></i> Appointment Template
+</a>
+<a href="?page=StaffLeave" class="db-sidebar-link {% if page == 'StaffLeave' %}active{% endif %}">
+    <i class="bi bi-calendar-x"></i> Staff Leave Application
+</a>
+<a href="?page=StaffData" class="db-sidebar-link {% if page == 'StaffData' %}active{% endif %}">
+    <i class="bi bi-person-gear"></i> Staff Data Edit/Delete
+</a>
+<a href="?page=StaffReposition" class="db-sidebar-link {% if page == 'StaffReposition' %}active{% endif %}">
+    <i class="bi bi-arrow-down-up"></i> Staff Reposition
+</a>
+<a href="?page=EmployeeData" class="db-sidebar-link {% if page == 'EmployeeData' %}active{% endif %}">
+    <i class="bi bi-people"></i> Employee Data
+</a>
+<a href="?page=DataRequest" class="db-sidebar-link {% if page == 'DataRequest' %}active{% endif %}">
+    <i class="bi bi-hdd-network"></i> Data Request
+</a>
+<a href="?page=LiveChat" class="db-sidebar-link {% if page == 'LiveChat' %}active{% endif %}">
+    <i class="bi bi-chat-heart"></i> Live Chat
+</a>
+{% endblock %}
+
+{% block db_title %}{{ page|default:"Human Resources" }}{% endblock %}
+
+{% block db_content %}
+<div class="row animated">
+    <div class="col-lg-12">
+        <div class="card premium-card p-5 text-center shadow-sm">
+            <h1 class="display-6 fw-bold mb-3 text-primary">{{ page|default:"Talent and Employee Management" }}</h1>
+            <p class="lead text-muted">{{ message|default:"Manage the recruitment pipeline, staffing records, and internal employee requests." }}</p>
+            <div class="alert alert-primary d-inline-block mt-4 mx-auto px-4 rounded-pill">
+                <i class="bi bi-info-square me-2"></i> This is a placeholder page for the <strong>{{ page }}</strong> HR module. Implementation coming soon.
+            </div>
+            <div class="mt-4 p-3 bg-light rounded text-dark small fw-bold">
+                CONTEXT ACTIVE: Unit [{{ request.session.context_unit|default:"Global" }}] | Country [{{ request.session.context_country|default:"Global" }}]
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

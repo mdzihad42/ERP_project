@@ -1,0 +1,89 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block title %}Order Dashboard - Bavaria ERP{% endblock %}
+{% block sidebar_title %}ORDER MENU{% endblock %}
+
+{% block sidebar_items %}
+<a href="?page=PlacedOrder" class="db-sidebar-link {% if page == 'PlacedOrder' %}active{% endif %}">
+    <i class="bi bi-cart-plus"></i> Placed Order
+</a>
+<a href="?page=BudgetPlanning" class="db-sidebar-link {% if page == 'BudgetPlanning' %}active{% endif %}">
+    <i class="bi bi-wallet-fill"></i> Budget & Planning
+</a>
+<a href="?page=ProductionPlanning" class="db-sidebar-link {% if page == 'ProductionPlanning' %}active{% endif %}">
+    <i class="bi bi-diagram-3"></i> Production Planning
+</a>
+<a href="?page=AccountsPayment" class="db-sidebar-link {% if page == 'AccountsPayment' %}active{% endif %}">
+    <i class="bi bi-credit-card-2-front"></i> Accounts & Payment
+</a>
+<a href="?page=MachineLayout" class="db-sidebar-link {% if page == 'MachineLayout' %}active{% endif %}">
+    <i class="bi bi-gear-wide-connected"></i> Machine Layout
+</a>
+<a href="?page=Purchase" class="db-sidebar-link {% if page == 'Purchase' %}active{% endif %}">
+    <i class="bi bi-bag-plus"></i> Purchase
+</a>
+<a href="?page=DeliveryReceived" class="db-sidebar-link {% if page == 'DeliveryReceived' %}active{% endif %}">
+    <i class="bi bi-box-seam"></i> Delivery & Received
+</a>
+<a href="?page=Cutting" class="db-sidebar-link {% if page == 'Cutting' %}active{% endif %}">
+    <i class="bi bi-scissors"></i> Cutting
+</a>
+<a href="?page=Embroidery" class="db-sidebar-link {% if page == 'Embroidery' %}active{% endif %}">
+    <i class="bi bi-flower1"></i> Embroidery
+</a>
+<a href="?page=Swing" class="db-sidebar-link {% if page == 'Swing' %}active{% endif %}">
+    <i class="bi bi-hammer"></i> Swing
+</a>
+<a href="?page=Labelling" class="db-sidebar-link {% if page == 'Labelling' %}active{% endif %}">
+    <i class="bi bi-tag"></i> Labelling
+</a>
+<a href="?page=QC" class="db-sidebar-link {% if page == 'QC' %}active{% endif %}">
+    <i class="bi bi-patch-check"></i> QC
+</a>
+<a href="?page=Ironing" class="bi bi-fire db-sidebar-link {% if page == 'Ironing' %}active{% endif %}">
+    <i class="bi bi-fire"></i> Ironing
+</a>
+<a href="?page=Poly" class="db-sidebar-link {% if page == 'Poly' %}active{% endif %}">
+    <i class="bi bi-layers"></i> Poly
+</a>
+<a href="?page=Packing" class="db-sidebar-link {% if page == 'Packing' %}active{% endif %}">
+    <i class="bi bi-box2-heart"></i> Packing
+</a>
+<a href="?page=ReadyForShipping" class="db-sidebar-link {% if page == 'ReadyForShipping' %}active{% endif %}">
+    <i class="bi bi-truck-flatbed"></i> Ready For Shipping
+</a>
+<a href="?page=Shipping" class="db-sidebar-link {% if page == 'Shipping' %}active{% endif %}">
+    <i class="bi bi-truck"></i> Shipping
+</a>
+<a href="?page=Weast" class="db-sidebar-link {% if page == 'Weast' %}active{% endif %}">
+    <i class="bi bi-recycle"></i> Weast
+</a>
+<a href="?page=ProductionCost" class="db-sidebar-link {% if page == 'ProductionCost' %}active{% endif %}">
+    <i class="bi bi-calculator"></i> Production Cost
+</a>
+<a href="?page=Stock" class="db-sidebar-link {% if page == 'Stock' %}active{% endif %}">
+    <i class="bi bi-box-fill"></i> Stock
+</a>
+<a href="?page=LiveChat" class="db-sidebar-link {% if page == 'LiveChat' %}active{% endif %}">
+    <i class="bi bi-chat-dots-fill"></i> Live Chat
+</a>
+{% endblock %}
+
+{% block db_title %}{{ page|default:"Order Management" }}{% endblock %}
+
+{% block db_content %}
+<div class="row animated">
+    <div class="col-lg-12">
+        <div class="card premium-card p-5 text-center shadow-sm">
+            <h1 class="display-6 fw-bold mb-3 text-success">{{ page|default:"Real-time Production Pipeline" }}</h1>
+            <p class="lead text-muted">{{ message|default:"Monitor the entire lifecycle of an order from cutting to final packing and shipping." }}</p>
+            <div class="alert alert-success d-inline-block mt-4 mx-auto px-4 rounded-pill">
+                <i class="bi bi-check2-circle me-2"></i> This is a placeholder page for the <strong>{{ page }}</strong> order module. Implementation coming soon.
+            </div>
+            <div class="mt-4 p-3 bg-light rounded text-dark small fw-bold">
+                CONTEXT ACTIVE: Unit [{{ request.session.context_unit|default:"Global" }}] | Country [{{ request.session.context_country|default:"Global" }}]
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

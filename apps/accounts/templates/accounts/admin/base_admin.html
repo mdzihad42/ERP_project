@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block extra_css %}
+<style>
+    .admin-sidebar {
+        width: 280px;
+        min-height: 100vh;
+        background: white;
+        border-right: 1px solid #eee;
+    }
+    .admin-content {
+        flex: 1;
+        padding: 2rem;
+        background: #fdfdfd;
+    }
+    .sidebar-link {
+        display: flex;
+        align-items: center;
+        padding: 0.8rem 1.5rem;
+        color: #555;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.2s;
+        border-radius: 10px;
+        margin: 4px 10px;
+    }
+    .sidebar-link:hover, .sidebar-link.active {
+        background-color: var(--bavaria-blue);
+        color: white !important;
+    }
+    .sidebar-link i {
+        margin-right: 12px;
+        font-size: 1.2rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex" style="margin-top: -3rem; margin-left: -1rem; margin-right: -1rem;">
+    <!-- Sidebar -->
+    <div class="admin-sidebar shadow-sm py-4">
+        <h5 class="px-4 mb-4 fw-bold">User Permission</h5>
+        
+        <a href="{% url 'user_approval' %}" class="sidebar-link {% if 'approval' in request.path %}active{% endif %}">
+            <i class="bi bi-person-check-fill"></i> User Approval
+        </a>
+        <a href="{% url 'admin_department' %}" class="sidebar-link {% if 'department' in request.path %}active{% endif %}">
+            <i class="bi bi-box-fill"></i> Department
+        </a>
+        <a href="{% url 'admin_position' %}" class="sidebar-link {% if 'position' in request.path %}active{% endif %}">
+            <i class="bi bi-briefcase-fill"></i> Position
+        </a>
+        <a href="{% url 'admin_unit' %}" class="sidebar-link {% if 'unit' in request.path %}active{% endif %}">
+            <i class="bi bi-building-add"></i> Unit Numbers
+        </a>
+        <a href="{% url 'admin_permissions' %}" class="sidebar-link {% if 'permissions' in request.path %}active{% endif %}">
+            <i class="bi bi-key-fill"></i> User Permissions
+        </a>
+        <a href="{% url 'admin_track' %}" class="sidebar-link {% if 'track' in request.path %}active{% endif %}">
+            <i class="bi bi-eye-fill"></i> User Track
+        </a>
+        <div class="border-top mx-3 my-3"></div>
+        <a href="#" class="sidebar-link">
+            <i class="bi bi-chat-dots-fill"></i> Live Chat
+        </a>
+    </div>
+
+    <!-- Content Area -->
+    <div class="admin-content">
+        <div class="row mb-4">
+            <div class="col">
+                <h2 class="fw-bold">{% block admin_title %}{% endblock %}</h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/" class="text-decoration-none">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">User Permission Module</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        
+        {% if messages %}
+        <div class="row">
+            <div class="col">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show small" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% block admin_content %}{% endblock %}
+    </div>
+</div>
+{% endblock %}

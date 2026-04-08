@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block extra_css %}
+<style>
+    .dashboard-sidebar {
+        width: 280px !important;
+        min-width: 280px !important;
+        height: 100vh !important;
+        background: #ffffff !important;
+        border-right: 1px solid #edf2f7;
+        display: flex !important;
+        flex-direction: column !important;
+        overflow-y: auto !important;
+        padding-top: 20px;
+    }
+    .db-sidebar-link {
+        display: flex !important;
+        width: calc(100% - 24px) !important;
+        align-items: center;
+        padding: 10px 20px !important;
+        margin: 2px 12px !important;
+        color: #4a5568 !important;
+        text-decoration: none !important;
+        background: transparent;
+        border-radius: 8px;
+        font-size: 13px !important;
+        white-space: nowrap !important;
+    }
+    .db-sidebar-link:hover, .db-sidebar-link.active {
+        background-color: #ebf8ff;
+        color: var(--bavaria-blue) !important;
+        font-weight: 700;
+    }
+    .db-sidebar-link i {
+        font-size: 1.1rem;
+        margin-right: 12px;
+        min-width: 20px;
+    }
+    .dashboard-content {
+        flex: 1;
+        padding: 2.5rem;
+        background: #f7fafc;
+    }
+    .stat-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        border: none;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex" style="margin-top: -3rem; margin-left: -1rem; margin-right: -1rem;">
+    <!-- Sidebar -->
+    <div class="dashboard-sidebar shadow-sm py-4">
+        <div class="px-4 mb-4">
+            <h6 class="text-uppercase text-muted fw-bold mb-0" style="font-size: 11px; letter-spacing: 1px;">
+                {% block sidebar_title %}DASHBOARD{% endblock %}
+            </h6>
+        </div>
+        
+        {% block sidebar_items %}
+        {% endblock %}
+        
+        <div class="border-top mx-3 my-4"></div>
+        <a href="{% url 'logout' %}" class="db-sidebar-link text-danger">
+            <i class="bi bi-box-arrow-right"></i> Logout
+        </a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="dashboard-content">
+        <!-- New Module Breadcrumb -->
+        <div class="mb-3">
+            <a href="{% url 'module_gateway' %}" class="text-decoration-none small fw-bold text-muted">
+                <i class="bi bi-chevron-left"></i> Back to Module Selection
+            </a>
+        </div>
+
+        <div class="row mb-4 align-items-center">
+            <div class="col">
+                <h3 class="fw-bold text-dark mb-1">{% block db_title %}Overview{% endblock %}</h3>
+                <p class="text-muted small mb-0">Welcome back, {{ user.first_name }}!</p>
+            </div>
+            <div class="col-auto">
+                <div class="bg-white px-3 py-2 rounded-pill shadow-sm border small fw-bold">
+                    <span class="text-muted me-2">Today:</span> {% now "d M Y" %}
+                </div>
+            </div>
+        </div>
+
+        {% if messages %}
+        <div class="alert-container">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% block db_content %}
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'accounts/admin/base_admin.html' %}
+
+{% block admin_title %}User Permissions{% endblock %}
+
+{% block admin_content %}
+<div class="card premium-card p-4">
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="fw-bold">User</th>
+                    <th class="fw-bold">Role</th>
+                    <th class="fw-bold">Current Unit</th>
+                    <th class="fw-bold">Status</th>
+                    <th class="fw-bold text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in users %}
+                <tr>
+                    <td>
+                        <div class="fw-bold small">{{ u.email }}</div>
+                        <div class="text-muted" style="font-size: 11px;">{{ u.first_name }} {{ u.last_name }}</div>
+                    </td>
+                    <td><span class="badge bg-secondary small">{{ u.user_role }}</span></td>
+                    <td>{{ u.unit_no.unit_no|default:"No Unit" }}</td>
+                    <td>
+                        {% if u.status == 'Approved' %}
+                        <span class="text-success"><i class="bi bi-check-circle-fill me-1"></i> Approved</span>
+                        {% elif u.status == 'Pending' %}
+                        <span class="text-warning"><i class="bi bi-clock-history me-1"></i> Pending</span>
+                        {% else %}
+                        <span class="text-danger"><i class="bi bi-x-circle-fill me-1"></i> Rejected</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        <button class="btn btn-sm btn-outline-primary rounded-pill px-3">Modify Permission</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

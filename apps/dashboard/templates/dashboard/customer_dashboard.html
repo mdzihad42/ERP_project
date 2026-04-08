@@ -1,0 +1,53 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block title %}Customer Dashboard - Bavaria ERP{% endblock %}
+{% block sidebar_title %}CUSTOMER MENU{% endblock %}
+
+{% block sidebar_items %}
+<a href="?page=Product" class="db-sidebar-link {% if page == 'Product' %}active{% endif %}">
+    <i class="bi bi-shop"></i> Product
+</a>
+<a href="?page=Orders" class="db-sidebar-link {% if page == 'Orders' %}active{% endif %}">
+    <i class="bi bi-cart-check"></i> My Orders
+</a>
+<a href="?page=Carts" class="db-sidebar-link {% if page == 'Carts' %}active{% endif %}">
+    <i class="bi bi-bag"></i> My Carts
+</a>
+<a href="?page=Coins" class="db-sidebar-link {% if page == 'Coins' %}active{% endif %}">
+    <i class="bi bi-coin"></i> My Coins
+</a>
+<a href="?page=Message" class="db-sidebar-link {% if page == 'Message' %}active{% endif %}">
+    <i class="bi bi-chat-text"></i> Message
+</a>
+<a href="?page=Payment" class="db-sidebar-link {% if page == 'Payment' %}active{% endif %}">
+    <i class="bi bi-credit-card"></i> Payment
+</a>
+<a href="?page=Wishlist" class="db-sidebar-link {% if page == 'Wishlist' %}active{% endif %}">
+    <i class="bi bi-heart"></i> Wish List
+</a>
+<a href="?page=Coupons" class="db-sidebar-link {% if page == 'Coupons' %}active{% endif %}">
+    <i class="bi bi-ticket-perforated"></i> My Coupons
+</a>
+<a href="?page=Reports" class="db-sidebar-link {% if page == 'Reports' %}active{% endif %}">
+    <i class="bi bi-exclamation-triangle"></i> Disputes & Reports
+</a>
+<a href="?page=Help" class="db-sidebar-link {% if page == 'Help' %}active{% endif %}">
+    <i class="bi bi-question-circle"></i> Help Center
+</a>
+{% endblock %}
+
+{% block db_title %}{{ page|default:"Dashboard Home" }}{% endblock %}
+
+{% block db_content %}
+<div class="row animated">
+    <div class="col-lg-12">
+        <div class="card premium-card p-5 text-center">
+            <h1 class="display-6 fw-bold mb-3 text-primary">{{ page|default:"Welcome to your Shopping Hub!" }}</h1>
+            <p class="lead text-muted">{{ message|default:"Manage your products, track orders, and view your loyalty coins here." }}</p>
+            <div class="alert alert-info d-inline-block mt-4 mx-auto px-4 rounded-pill">
+                <i class="bi bi-info-circle me-2"></i> This is a placeholder page for the <strong>{{ page }}</strong> module. Implementation coming soon.
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

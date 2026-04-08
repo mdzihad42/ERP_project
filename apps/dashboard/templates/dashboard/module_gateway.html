@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Module Gateway - Bavaria ERP{% endblock %}
+
+{% block content %}
+<div class="row mb-5 text-center animated">
+    <div class="col">
+        <h1 class="fw-bold">Bavaria <span class="text-primary">Enterprise Modules</span></h1>
+        <p class="text-muted">Please select a module to enter. Requires secondary authentication.</p>
+    </div>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4 animated" style="animation-delay: 0.2s;">
+    <!-- Attendance Card -->
+    <div class="col">
+        <div class="card premium-card h-100 text-center p-4" onclick="location.href='?module=attendance&step=auth'">
+            <div class="card-body">
+                <i class="bi bi-clock-history role-icon text-info"></i>
+                <h4 class="fw-bold">Attendance</h4>
+                <p class="text-muted small">Employee tracking, payroll, and schedules.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Card -->
+    <div class="col">
+        <div class="card premium-card h-100 text-center p-4" onclick="location.href='?module=order&step=auth'">
+            <div class="card-body">
+                <i class="bi bi-cart4 role-icon text-success"></i>
+                <h4 class="fw-bold">Order</h4>
+                <p class="text-muted small">Production, shipping, and billing.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- HR Card -->
+    <div class="col">
+        <div class="card premium-card h-100 text-center p-4" onclick="location.href='?module=hr&step=auth'">
+            <div class="card-body">
+                <i class="bi bi-person-workspace role-icon text-primary"></i>
+                <h4 class="fw-bold">HR</h4>
+                <p class="text-muted small">New hire, templates, and employee data.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Incident Card -->
+    <div class="col">
+        <div class="card premium-card h-100 text-center p-4" onclick="location.href='?module=incident&step=auth'">
+            <div class="card-body">
+                <i class="bi bi-shield-exclamation role-icon text-danger"></i>
+                <h4 class="fw-bold">Incident</h4>
+                <p class="text-muted small">Justice, COURT, and third-party reports.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Equipment Card -->
+    <div class="col">
+        <div class="card premium-card h-100 text-center p-4" onclick="location.href='?module=equipment&step=auth'">
+            <div class="card-body">
+                <i class="bi bi-tools role-icon text-warning"></i>
+                <h4 class="fw-bold">Equipment</h4>
+                <p class="text-muted small">Maintenance and register.</p>
+            </div>
+        </div>
+    </div>
+
+    {% if user.user_role == 'Super Admin' %}
+    <!-- User Permission Card (Super Admin Only) -->
+    <div class="col">
+        <div class="card premium-card h-100 text-center p-4 border-primary" onclick="location.href='{% url 'user_approval' %}'">
+            <div class="card-body">
+                <i class="bi bi-key role-icon text-dark"></i>
+                <h4 class="fw-bold">User Permission</h4>
+                <p class="text-muted small">Approvals, CRUD management, and track.</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% if step == 'auth' %}
+<!-- Secondary Auth Modal (Simulated as content) -->
+<div class="modal fade show d-block" style="background: rgba(0,0,0,0.5);" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 premium-card">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title fw-bold">Secondary Authentication Required</h5>
+                <button type="button" class="btn-close" onclick="location.href='?'"></button>
+            </div>
+            <div class="modal-body p-4">
+                <p class="small text-muted mb-4">Please confirm your password to enter the <strong>{{ module_name|upper }}</strong> module.</p>
+                <form method="POST" action="?module={{ module_name }}&step=context">
+                    {% csrf_token %}
+                    <div class="mb-4">
+                        <label class="form-label small fw-bold">Your Login Password</label>
+                        <input type="password" name="password" class="form-control py-3" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn btn-bavaria w-100 py-3 rounded-pill">Confirm Entry</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if step == 'context' %}
+<!-- Context Selection Modal -->
+<div class="modal fade show d-block" style="background: rgba(0,0,0,0.5);" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 premium-card">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title fw-bold">Module Configuration</h5>
+                <button type="button" class="btn-close" onclick="location.href='?'"></button>
+            </div>
+            <div class="modal-body p-4">
+                <p class="small text-muted mb-4">Enter contextual information for <strong>{{ module_name|upper }}</strong>.</p>
+                <form method="POST" action="{% url 'module_dashboard' module_name %}">
+                    {% csrf_token %}
+                    
+                    {% if user.user_role == 'Admin' or user.user_role == 'Super Admin' %}
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Select Country</label>
+                        <select name="context_country" class="form-select bg-light">
+                            <option value="{{ user.country.id }}">{{ user.country.name }} (Your Registered Region)</option>
+                            {% if user.user_role == 'Super Admin' %}
+                            <option value="all">-- All Countries (International) --</option>
+                            {% endif %}
+                        </select>
+                    </div>
+                    {% endif %}
+
+                    {% if user.user_role == 'Unit' or user.user_role == 'Super Admin' %}
+                    <div class="mb-4">
+                        <label class="form-label small fw-bold">Select Unit Number</label>
+                        <select name="context_unit" class="form-select bg-light">
+                            <option value="{{ user.unit_no.id }}">{{ user.unit_no.unit_no }} (Your Assigned Unit)</option>
+                            {% if user.user_role == 'Super Admin' %}
+                            <option value="all">-- All Units (Global) --</option>
+                            {% endif %}
+                        </select>
+                        <small class="text-muted" style="font-size: 11px;">You will only see data related to this unit.</small>
+                    </div>
+                    {% endif %}
+
+                    <button type="submit" class="btn btn-bavaria w-100 py-3 rounded-pill">Enter Dashboard</button>
+                    <p class="text-center mt-3 mb-0 small text-muted">Field is editable but defaults to your profile data.</p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

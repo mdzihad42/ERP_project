@@ -1,0 +1,38 @@
+{% extends 'accounts/admin/base_admin.html' %}
+
+{% block admin_title %}Unit Numbers Management{% endblock %}
+
+{% block admin_content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h5 class="text-muted mb-0">Total Registered Units: {{ units.count }}</h5>
+    <a href="{% url 'admin_unit_create' %}" class="btn btn-bavaria"><i class="bi bi-plus-lg me-2"></i> Create Unit Number</a>
+</div>
+
+<div class="card premium-card p-4">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th class="fw-bold">Unit No.</th>
+                    <th class="fw-bold">City</th>
+                    <th class="fw-bold">Description</th>
+                    <th class="fw-bold text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in units %}
+                <tr>
+                    <td class="fw-bold text-primary">{{ u.unit_no }}</td>
+                    <td>{{ u.city.name }}</td>
+                    <td class="text-muted small">{{ u.description|truncatewords:10 }}</td>
+                    <td class="text-center">
+                        <a href="{% url 'admin_unit_edit' u.pk %}" class="btn btn-sm btn-outline-primary me-2"><i class="bi bi-pencil"></i></a>
+                        <a href="{% url 'admin_unit_delete' u.pk %}" onclick="return confirm('Delete this unit?')" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
